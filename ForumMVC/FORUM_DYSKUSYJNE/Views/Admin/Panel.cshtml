@@ -1,0 +1,29 @@
+﻿@using FORUM_DYSKUSYJNE.CustomMembershipMVC
+
+
+<div  style="font-size:50px; font:bold; text-align:center;">ADMIN PANEL</div>
+@if ((User as CustomPrincipal).IsInRole("Admin"))
+{
+<div class="container col-lg-offset-2  " style="border-spacing:10px 2px;">
+	<div class="row ">
+
+		@Html.ActionLink("Add Announcement", "Announcement", "Admin", new { @class = "btn btn-primary announcement-button1" })
+		@Html.ActionLink("Manage Users", "Privileges", "Admin", new { @class = "btn btn-primary announcement-button2", })
+	</div>
+	<div class="row ">
+		@Html.ActionLink("Create section", "CreateSection", "Admin", new { @class = "btn btn-primary announcement-button2", })
+		@Html.ActionLink("Edit or Delete section", "EditDeleteForum", "Admin", new { @class = "btn btn-primary announcement-button1", })
+
+	</div>
+		<div class="row ">
+			@Html.ActionLink("Manage forbidden words", "ForbiddenWords", "Admin", new { @class = "btn btn-primary announcement-button1", })
+
+
+		</div>
+	</div>
+
+
+	}
+
+
+

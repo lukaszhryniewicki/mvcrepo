@@ -1,0 +1,25 @@
+﻿@{
+	ViewBag.Title = "Activation Account ^_^";
+}
+
+<div class=" col-lg-offset-4 img2">
+	<img src="~/Content/images/hotslogo.png" />
+</div>
+<div class="col-lg-8 col-lg-offset-2">
+	
+	@if (ViewBag.Status != null && Convert.ToBoolean(ViewBag.Status))
+	{
+		<p></p>
+		<div class="alert alert-success">
+			<strong>Success!</strong>  Your account has been activated successfully.
+		</div>
+	}
+	else
+	{
+		<div class="alert alert-danger">
+			<strong>Error!</strong>@ViewBag.Message
+		</div>
+	}
+</div>
+
+

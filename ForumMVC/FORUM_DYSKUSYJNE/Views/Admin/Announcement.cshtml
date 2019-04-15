@@ -1,0 +1,58 @@
+﻿@model FORUM_DYSKUSYJNE.Database.Announcement
+
+@{
+	ViewBag.Title = "Announcement";
+}
+<head>
+	
+	<script src="~/Scripts/jquery-ui-1.12.1.min.js"></script>
+
+	<link href="~/Content/themes/base/jquery-ui.min.css" rel="stylesheet" />
+
+</head>
+
+
+<h1 style="text-align:center;padding-bottom:60px;"> Add Announcement</h1>
+<p></p>
+
+<div class="col-lg-offset-1">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+		@Html.ValidationMessageFor(model => model.ExpirationDate, "", new { @class = "text-danger" })
+		@Html.ValidationMessage("TimeError", new { @class = "text-danger" })
+		@Html.ValidationMessageFor(model => model.Content, "", new { @class = "text-danger" })
+		<div class="form-horizontal">
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.ExpirationDate, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.ExpirationDate, new { htmlAttributes = new { @class = "", placeholder = "YYYY-MM-DD", id = "date" } })
+
+				</div>
+			</div>
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group ">
+				@Html.LabelFor(model => model.Content, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.TextAreaFor(x => x.Content, htmlAttributes: new { placeholder = "Type Announcement", cols = 81, rows = 5, @class = " form control login-fields", style = "resize:none; max-width:none;" })
+
+				</div>
+			</div>
+
+
+
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Add Announcement" class="btn btn-primary" style="width:565px; max-width:none;" />
+				</div>
+			</div>
+		</div>
+	}
+</div>
+<script type="text/javascript">
+	$(document).ready(function () {
+		$("#date").datepicker();
+	});
+</script>

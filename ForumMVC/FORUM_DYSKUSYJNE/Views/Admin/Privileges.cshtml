@@ -1,0 +1,29 @@
+﻿
+@model  IEnumerable<FORUM_DYSKUSYJNE.Database.User>
+
+@using FORUM_DYSKUSYJNE.CustomMembershipMVC
+
+@{
+				/**/
+
+				/**/
+
+
+
+				ViewBag.Title = "Manage user";
+}
+
+
+<h1 style="padding-bottom:30px; text-align:center;">Privileges</h1>
+<h3 style="text-align:center; padding-bottom:15px;" >List of users</h3>
+<div class="list-group ">
+	@foreach (var user in Model)
+	{
+
+	<p>
+		@Html.ActionLink(user.Username, "PrivilegesDetail", "Admin", new { @id = user.UserId },new {@class= "list-group-item list-group-item-action   admin-privilageblock " })
+	</p>
+
+	}
+</div>
+<p style="padding-bottom:55px;"></p>

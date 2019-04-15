@@ -1,0 +1,19 @@
+• forum z mozliwoscia tworzenia watków i dopisywania wiadomosci do istniejacych watków.
+• rejestracja uzytkowników. Profil uzytkownika. Mozliwosc zalogowania sie do systemu.
+• panel administracyjny do zarzadzania wiadomosciami i uzytkownikami.
+• mozliwosc definiowania forów. Funkcjonalnosc dostepna tylko dla administratora. Dane forum moze nalezec do dokladnie jednej kategorii.
+• uprawnienia dla uzytkowników zalogowanych przydzielone poszczególnym forom. Istnieja dwa poziomy uprawnien: do ogladania wiadomosci i do pisania wlasnych. Uzytkownicy zalogowani maja pelne uprawnienia do ogladania i pisania.
+• przydzielenie moderatorów dla kazdego forum. Kazde forum moze miec wielu moderatorów a kazdy uzytkownik moze byc moderatorem na wielu forach. Moderator ma prawo edycji i usuwania wiadomosci.
+• proste statystyki wyswietlane na stronach: liczba zarejestrowanych uzytkowników, liczba watków i wiadomosci dla kazdego z forów, liczba odslon i odpowiedzi dla kazdego watku.
+• watki przyklejone, wyswietlane zawsze na górze listy watków. Watki przyklejone moze tworzyc tylko administrator.
+• ogloszenia administracyjne wyswietlane na stronie glównej forum.
+• wysylanie wiadomosci prywatnych pomiedzy uzytkownikami. Mozliwosc odczytu i usuniecia wiadomosci po zalogowaniu.
+• automatyczne wylogowanie po ustalonym w profilu czasie braku aktywnosci.
+• awatary w profilu uzytkownika. Ograniczenie na rozdzielczosc i wielkosc (w kB) wgrywanych obrazków.
+• wyszukiwanie wedlug slów kluczowych w tresciach wiadomosci z danego forum.
+• dolaczanie zalaczników do wiadomosci. Ograniczenie liczby zalaczników i wielkosci pojedynczego zalacznika.
+• mozliwosc zgloszenia wiadomosci do moderacji. Zgloszenie pokazuje sie jako wiadomosc u moderatora.
+• slownik slów zakazanych. Automatyczne nieprzyjmowanie wiadomosci zawierajacych takie slowa. Zarzadzanie slownikiem przez administratora.
+• emotikony w tresciach wiadomosci.
+• automatyczne nadawanie rangi uzytkownikom w zaleznosci od liczby wprowadzonych wiadomosci. Mozliwosc recznej zmiany rangi przez administratora.
+• bezpieczna procedura przypominania i zmiany hasla.
