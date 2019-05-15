@@ -1,32 +1,42 @@
-﻿using FORUM_DYSKUSYJNE.CustomMembershipMVC;
-using FORUM_DYSKUSYJNE.Database;
-using FORUM_DYSKUSYJNE.Models;
+﻿using FluentValidation.Mvc;
+using FORUM_DYSKUSYJNE.CustomMembershipMVC;
+using FORUM_DYSKUSYJNE.Web.ViewModels;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
-using static FORUM_DYSKUSYJNE.Models.LoginView;
+
 
 namespace FORUM_DYSKUSYJNE
 {
     public class MvcApplication : HttpApplication
     {
-        protected void Application_Start()
-        {
-            AreaRegistration.RegisterAllAreas();
-            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
-            RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
+		
 
+		protected void Application_Start()
+		{
+			AreaRegistration.RegisterAllAreas();
+			FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+			RouteConfig.RegisterRoutes(RouteTable.Routes);
+			BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+			FluentValidationModelValidatorProvider.Configure();
 
 			Bootstrapper.Initialise();
-			
+			ViewEngines.Engines.Clear();
+	
+			ViewEngines.Engines.Add(new RazorViewEngine()
+			{
+				ViewLocationFormats = new string[]{
+			"~/Web/Views/{1}/{0}.cshtml",
+			"~/Web/Views/{0}.cshtml"
+			}
+			});
+
 
 		}
 

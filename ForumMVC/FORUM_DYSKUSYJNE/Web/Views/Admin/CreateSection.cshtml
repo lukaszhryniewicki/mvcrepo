@@ -1,0 +1,70 @@
+﻿@model  FORUM_DYSKUSYJNE.Web.ViewModels.PanelView
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+@{
+	ViewBag.Title = "View";
+}
+
+<h1 style="padding-bottom:30px; text-align:center;">Add Section</h1>
+@using (Html.BeginForm())
+{
+<div class="form-horizontal col-lg-offset-4 ">
+
+
+
+	<div class="form-group ">
+		@Html.LabelFor(m => m.SelectedGroup, htmlAttributes: new { @class = "control-label col-md-2" })
+		@Html.DropDownListFor(g => g.SelectedGroup, new SelectList(Model.Groups, "GroupId", "GroupName"), "Select", new { @id = "groupid", @class = "form-control login-fields" })
+
+	</div>
+
+	<div class="form-group ">
+
+		@Html.LabelFor(m => m.SelectedSection, htmlAttributes: new { style = "margin-left:43px;" })
+
+		@Html.DropDownListFor(m => m.SelectedSection, new SelectList(Enumerable.Empty<SelectListItem>(), "SectionId", "Name"), "Select", new { @class = "form-control login-fields", style = "margin-left:132px;margin-top:-25px;	", disabled = true, @id = "sectionid" })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 " })
+
+		@Html.TextBoxFor(m => m.Name, new { @class = "form-control login-fields", placeholder = "Section Name" })
+		@Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+	</div>
+	<div class="form-group">
+		@Html.LabelFor(m => m.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+		@Html.TextAreaFor(x => x.Description, htmlAttributes: new { placeholder = "Section Description", cols = 60, rows = 5, @class = " form control login-fields", style = "resize:none; max-width:none;" })
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" value="Create section" class="btn btn-primary" style="width:300px;margin-left:-15px;" />
+		</div>
+	</div>
+</div>
+}
+
+<script type="text/javascript">
+
+	$(function () {
+				$('#groupid')
+					.change(function () {
+						$('#sectionid').html(null);
+						var url = '@Url.Action("GetSection", "Admin")';
+						$.getJSON(url,
+							"group=" + $('#groupid').val(),
+							function (data) {
+							 $("#sectionid").prop("disabled", false);
+								$.each(data,
+									function (i, sections) {
+										 $("#sectionid")
+											.append(
+											 $('<option value=></option>').val(sections.SectionId).html(sections.Name));
+									});
+							});
+					});
+
+
+
+			});
+
+
+</script>

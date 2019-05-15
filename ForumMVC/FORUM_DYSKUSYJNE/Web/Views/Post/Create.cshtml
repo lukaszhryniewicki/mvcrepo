@@ -1,0 +1,165 @@
+﻿@using FORUM_DYSKUSYJNE.CustomMembershipMVC
+@model FORUM_DYSKUSYJNE.Web.ViewModels.PostView
+
+@{
+
+
+	ViewBag.Title = "Create";
+}
+@Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
+<div class="imgbox	">
+	<img src="~/Content/images/topimg.png" class="center-fit" />
+</div>
+@if (Model.ForbiddenWords.Any())
+{
+
+
+	<h3>Forbidden word has been detected: </h3>
+	foreach (string x in Model.ForbiddenWords)
+	{
+		<p>@x</p>
+	}
+
+}
+
+<div class=" my-row">
+
+	<img style="margin-top:25px;" src="~/Content/Images/hotsminilogo.png" class="mini-logo" />
+	<h1 style="padding-top:10px;padding-left:10px; padding-bottom:10px;">@Model.Topic.Name</h1>
+</div>
+<hr />
+
+@foreach (var post in Model.Topic.Post.OrderBy(o => o.CreateDate))
+{
+
+	<div style="display:flex;flex-direction:row;">
+
+
+		@if (post.User.Avatar != null)
+		{
+
+			<img src="@Url.Action("UserAvatar", "Account", new { @id= post.User.UserId} )"
+				 style="width:80px;height:80px; background: #FFFFFF;padding: 6px;" />
+
+
+		}
+		else
+		{
+			<img src="~/Content/Images/empty-avatar.png"
+				 style="width:80px;height:80px;  background: #FFFFFF;padding: 6px;" />
+
+		}
+
+		<div class="container">
+
+			<div class="col-lg-offset-1 ">
+				@Html.ActionLink(@post.User.Username, "AccountDetail", "Account", new { id = post.User.UserId }, htmlAttributes: new { @class = "topic-header" })
+			</div>
+
+			<div class=" col-lg-offset-1 col-lg-8 " style="padding-left:10px;">
+				@post.CreateDate.ToString("dd/MM/yyyy HH:mm:ss")
+			</div>
+			<div class="col-lg-3" align="right">
+				@if ((User as CustomPrincipal) != null)
+				{
+					if ((User as CustomPrincipal).IsInRole("Admin") || Model.isMod)
+					{
+						using (Html.BeginForm("Delete", "Post", new { id = post.PostId, topicId = post.TopicId }))
+						{
+							@Html.HttpMethodOverride(HttpVerbs.Delete)
+							<input type="submit" value="Delete" class="btn btn-danger "  />
+
+						}
+					}
+
+
+					if ((User as CustomPrincipal).IsInRole("Admin") || Model.isMod || (User as CustomPrincipal).UserId == post.User.UserId)
+					{
+						@Html.ActionLink(" Edit", "Edit", "Post", new { id = post.PostId }, htmlAttributes: new { @class = "btn btn-warning" })
+					}
+
+
+
+
+
+				}
+
+			</div>
+
+
+			<div class="col-lg-12 col-lg-offset-1 topic-description" style="padding-top:20px;">
+				@Html.Raw(post.Content)
+			</div>
+			@if (post.Attachment != null)
+			{
+				<p>
+
+					<div class="col-lg-offset-1">
+						@Html.ActionLink(post.Attachment.AttachmentName, "Download", "Post", new { id = post.PostId }, htmlAttributes: new { style = "color:white;padding-left:10px; " })
+					</div>
+				</p>
+			}
+		</div>
+	</div>
+	<div>
+
+	</div>
+
+
+
+	<p>
+		Rank: @post.User.Rank.RankName
+	</p>
+	<p>
+		@if ((User as CustomPrincipal) != null)
+		{
+
+
+			if ((User as CustomPrincipal).IsInRole("User"))
+			{
+				if (Session["Cooldown"] == null || ((DateTime)Session["Cooldown"]).AddMinutes(5) < (DateTime.Now))
+				{
+					@Html.ActionLink(" Report Post", "Report", "Post", new { id = post.PostId},
+						new { @class = "btn btn-warning" , onclick = "return confirm('Are you sure you want to send report ? \n The next report can be send after 30 seconds')" })
+				}
+
+
+			}
+		}
+	</p>
+	<div align="right">
+		<p> Last modified: : @post.LastModified.ToString("dd/MM/yyyy HH:mm:ss")</p>
+	</div>
+	<hr />
+}
+
+@Html.ValidationMessage("AvatarSizeError", new { @class = "text-danger" })
+
+@if ((User as CustomPrincipal) != null)
+{
+	using (Html.BeginForm("Create", "Post", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+	{
+
+		@Html.HiddenFor(m => m.TopicId)
+		<div class="form-group">
+			@Html.TextAreaFor(x => x.Content, htmlAttributes: new { placeholder = "New Post", cols = 60, rows = 5, @class = "col-lg-offset-4 form control login-fields", style = "resize:none; max-width:none;" })
+
+			@Html.ValidationMessageFor(m => m.Content, "", new { @class = "text-danger col-lg-12", style = "margin-left:32%" })
+		</div>
+
+		<div style="flex-direction:row;display:flex;">
+			<input class="col-lg-offset-4" type="file" name="@Html.NameFor(x=>x.UserAttachment)" id="@Html.IdFor(x=>x.UserAttachment)" accept="image/*,audio/*,video/*,.pdf,.doc,.docx" />
+
+
+
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Add post" class="btn btn-primary" style="width:129px;" />
+				</div>
+			</div>
+		</div>
+		@Html.ValidationMessageFor(m => m.UserAttachment.ContentLength, "", new { @class = "text-danger col-lg-12", style = "margin-left:32%" })
+	}
+}
+

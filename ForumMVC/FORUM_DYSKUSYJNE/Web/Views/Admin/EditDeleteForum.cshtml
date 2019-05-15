@@ -1,0 +1,36 @@
+﻿@model  FORUM_DYSKUSYJNE.Web.ViewModels.EditForumViewModel
+
+@{
+	ViewBag.Title = "Home Page";
+}
+
+@foreach (var group in Model.Groups)
+{<h2 style="text-align:center;">@group.GroupName</h2>
+foreach (var sectionn in Model.Sections)
+{
+	<div class="container col-lg-offset-3">
+		@if (group.GroupId == sectionn.GroupId)
+		{
+		<p>
+			<div class="row box">
+				
+
+					<h3>
+						@Html.ActionLink(@sectionn.Name, "Section", "Home", new { id = sectionn.SectionId  }, htmlAttributes: new { @class= "topic-header col-lg-7", })
+						@Html.ActionLink("Edit", "EditSection", "Admin", new { id = sectionn.SectionId }, htmlAttributes: new { @class = "topic-header privilege-link col-lg-2", })
+						@Html.ActionLink("Delete", "DeleteSection", "Admin", new { id = sectionn.SectionId }, htmlAttributes: new { @class = "topic-header privilege-link  col-lg-2" })
+
+					</h3>
+				<div class="topic-description  col-sm-12">
+					@sectionn.Description
+				</div>
+
+			</div>
+
+
+		</p>
+
+
+}	</div>
+}
+}

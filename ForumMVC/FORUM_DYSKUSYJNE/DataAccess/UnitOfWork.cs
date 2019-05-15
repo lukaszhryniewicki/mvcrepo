@@ -1,11 +1,11 @@
-﻿using FORUM_DYSKUSYJNE.Contracts;
+﻿using FORUM_DYSKUSYJNE.Core.Contracts;
 using FORUM_DYSKUSYJNE.DataAccess.Repositories;
-using FORUM_DYSKUSYJNE.Database;
+using FORUM_DYSKUSYJNE.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+// stary kod przed refaktoringiem
 namespace FORUM_DYSKUSYJNE.DataAccess
 {
 
@@ -14,13 +14,11 @@ namespace FORUM_DYSKUSYJNE.DataAccess
 		private readonly ForumDatabase _context ;
 		public ISectionRepository Sections { get; }
 		public ITopicRepository Topics { get; }
-		public IUserRepository Users { get; }
-		public UnitOfWork(ForumDatabase context, ISectionRepository sectionRepository,ITopicRepository topicRepository,IUserRepository userRepository)
+		public UnitOfWork(ForumDatabase context, ISectionRepository sectionRepository,ITopicRepository topicRepository)
 		{
 			_context = context;
 			Sections = sectionRepository;
 			Topics = topicRepository;
-			Users = userRepository;
 		}
 		public Dictionary<Type, object> repositories = new Dictionary<Type, object>();
 

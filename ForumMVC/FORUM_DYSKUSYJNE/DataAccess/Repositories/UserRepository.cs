@@ -1,16 +1,17 @@
-﻿using FORUM_DYSKUSYJNE.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using FORUM_DYSKUSYJNE.Core.Models;
+using FORUM_DYSKUSYJNE.Infrastructure.Data;
 
 namespace FORUM_DYSKUSYJNE.DataAccess.Repositories
 {
 	/// <summary>
 	/// Klasa implementujaca definicje interfejsu IUserRepository.
 	/// </summary>
-	public class UserRepository : Repository<User>, IUserRepository
+	public class UserRepository : Repository<User>
 	{
 		public UserRepository(ForumDatabase context) : base(context){ }
 

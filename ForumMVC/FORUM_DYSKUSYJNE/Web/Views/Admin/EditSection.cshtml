@@ -1,0 +1,98 @@
+﻿@model FORUM_DYSKUSYJNE.Web.ViewModels.PanelView
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+@{
+	ViewBag.Title = "EditSection";
+}
+
+<h1 style="text-align:center; padding-bottom:30px;">EditSection</h1>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	
+<div class="form-horizontal col-lg-offset-4">
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+  
+    @Html.HiddenFor(m => m.editedSectionId, new { @id = "editedSectionId"})
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2 " })
+        <div class="col-md-10 " style="margin-left:-15px;">
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control login-fields",placeholder="Name" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10" style="margin-left:-15px;">
+            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control login-fields", placeholder = "Description" } })
+            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+	<div class="form-group" >
+		<span style="margin-left:">
+			@Html.LabelFor(m => m.SelectedGroup, htmlAttributes: new { @class = "control-label col-md-2" })
+		</span>
+
+		@Html.DropDownListFor(g => g.SelectedGroup, new SelectList(Model.Groups, "GroupId", "GroupName"), new { @id = "groupid", @class = "form-control login-fields" })
+
+	</div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.SelectedSection, htmlAttributes: new { style = "margin-left:40px;" })
+        @Html.DropDownListFor(m => m.SelectedSection, new SelectList(Model.Sections, "SectionId", "Name"), new { @class = "form-control login-fields", @id = "sectionid" ,style="margin-left:132px;margin-top:-25px;" })
+    </div>
+
+
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Edit" class="btn btn-primary" style="width:300px; margin-left:-15px;"/>
+        </div>
+    </div>
+</div>
+}
+
+<script type="text/javascript">
+
+	$(function () {
+				$('#groupid')
+					.change(function () {
+						$('#sectionid').html(null);
+						var url = '@Url.Action("GetSection", "Admin")';
+						$.getJSON(url,
+							"group=" + $('#groupid').val(),
+							function (data) {
+								$.each(data,
+									function (i, sections) {
+										 $("#sectionid")
+											.append(
+											 $('<option value=></option>').val(sections.SectionId).html(sections.Name));
+									});
+							});
+					});
+    });
+
+
+    $('document').ready(function () {
+
+    function setSelectedIndex(s, v) {
+
+        for ( var i = 0; i < s.options.length; i++ ) {
+
+            if ( s.options[i].text == v ) {
+
+                s.options[i].selected = true;
+
+                return;
+            }
+        }
+    }
+
+
+        setSelectedIndex(document.getElementById("groupid"), '@Model.SelectedGroup');
+        setSelectedIndex(document.getElementById("sectionid"), '@Model.SelectedSection');
+			});
+</script>

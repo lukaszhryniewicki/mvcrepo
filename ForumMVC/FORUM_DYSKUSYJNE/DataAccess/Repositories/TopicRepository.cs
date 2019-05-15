@@ -1,9 +1,11 @@
-﻿using FORUM_DYSKUSYJNE.Database;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using FORUM_DYSKUSYJNE.Core.Models;
+using FORUM_DYSKUSYJNE.Infrastructure.Data;
+
 namespace FORUM_DYSKUSYJNE.DataAccess.Repositories
 {
 
@@ -13,7 +15,8 @@ namespace FORUM_DYSKUSYJNE.DataAccess.Repositories
 
 		public Topic GetTopicById(int id)
 		{
-			throw new NotImplementedException();
+			var topic = context.Topics.Where(x => x.TopicId == id).FirstOrDefault();
+			return topic;
 		}
 
 		public int? GetTopicsSection(int id)

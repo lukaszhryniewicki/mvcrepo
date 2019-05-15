@@ -1,0 +1,56 @@
+﻿@model FORUM_DYSKUSYJNE.Web.ViewModels.MessageView
+
+@{
+	ViewBag.Title = "SendMessage";
+}
+<div class=" col-lg-offset-4 img2">
+	<img src="~/Web/Content/images/hotslogo.png" />
+</div>
+
+
+<h1 style="text-align:center;padding-bottom:10px;">NEW MESSAGE</h1>
+@Html.ValidationMessage("Warning Username", new { @class = "text-danger col-lg-offset-4" })
+<div class="col-lg-offset-2">
+	@using (Html.BeginForm())
+	{
+		@Html.AntiForgeryToken()
+
+		<div class="form-horizontal">
+
+			<div class="form-group">
+				@Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control login-fields", placeholder = "To" } })
+					@Html.ValidationMessageFor(model => model.Username, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			<div class="form-group ">
+				@Html.LabelFor(model => model.MessageTitle, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.MessageTitle, new { htmlAttributes = new { @class = "form-control login-fields", placeholder = "Title" } })
+					@Html.ValidationMessageFor(model => model.MessageTitle, "", new { @class = "text-danger" })
+				</div>
+			</div>
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group ">
+				@Html.LabelFor(model => model.MessageContent, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-10">
+					@Html.TextAreaFor(x => x.MessageContent, htmlAttributes: new { placeholder = "Message", cols = 85, rows = 5, @class = " form control login-fields", style = "resize:none; max-width:none;" })
+					@Html.ValidationMessageFor(model => model.MessageContent, "", new { @class = "text-danger col-md-10 "})
+				</div>
+			</div>
+
+
+
+
+			<div class="form-group">
+				<div class="col-md-offset-2 col-md-10">
+					<input type="submit" value="Send message" class="btn btn-primary long-field" />
+				</div>
+			</div>
+		</div>
+
+
+
+	}
+</div>

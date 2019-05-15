@@ -1,0 +1,53 @@
+﻿@model FORUM_DYSKUSYJNE.Core.Models.Message
+
+@{
+    ViewBag.Title = "MessageDetails";
+}
+<div class=" col-lg-offset-4 img2">
+	<img src="~/Web/Content/images/hotslogo.png" />
+</div>
+<h1 style="text-align:center;">Message Details</h1>
+<hr />
+<div>
+	
+	<dl class="dl-horizontal" style="margin-left:350px;">
+		<dt>
+			@Html.LabelFor(x => x.Title, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+
+
+		<dd>
+			@Html.DisplayFor(model => model.Title)
+		</dd>
+
+		<dt>
+			@Html.LabelFor(model => model.Sender.Username, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Sender.Username)
+		</dd>
+
+		<dt>
+			@Html.LabelFor(model => model.Content, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+
+		<dd>
+		@Html.Raw(Model.Content)
+		</dd>
+
+		<dt>
+			@Html.LabelFor(model => model.SendDate, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.SendDate)
+		</dd>
+
+
+
+		</dt>
+
+
+	</dl>
+	
+</div>

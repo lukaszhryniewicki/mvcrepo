@@ -1,4 +1,5 @@
-﻿using FORUM_DYSKUSYJNE.Database;
+﻿using FORUM_DYSKUSYJNE.Core.Models;
+using FORUM_DYSKUSYJNE.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;

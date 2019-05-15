@@ -1,0 +1,47 @@
+﻿@model FORUM_DYSKUSYJNE.Web.ViewModels.EditViewModel
+
+@{
+	ViewBag.Title = "Edit";
+}
+
+<div class=" col-lg-offset-4 img2">
+	<img src="~/Content/images/hotslogo.png" />
+</div>
+<h1 align="center">Edit</h1>
+<hr />
+@if (Model.ForbiddenWords != null)
+{
+
+
+	<h3>Forbidden word has been detected: </h3>
+	foreach (string x in Model.ForbiddenWords)
+	{
+		<p>@x</p>
+	}
+
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+		@Html.HiddenFor(m => Model.Post.PostId)
+		@Html.HiddenFor(m => Model.Post.TopicId)
+		<div class="form-group">
+
+			@Html.LabelFor(x => x.Post.Content, htmlAttributes: new { style = "font-size:20px;display:block;padding-left:35px;",@class="col-lg-offset-3" })
+			<div class="col-md-10">
+				@Html.TextAreaFor(x => x.Post.Content, htmlAttributes: new { placeholder = "Edit Post", cols = 60, rows = 5, @class = "col-lg-offset-4 form control login-fields", style = "resize:none; max-width:none;" })				@Html.ValidationMessageFor(model => model.Post.Content, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+
+
+		<div class="form-group">
+			<div class="col-md-offset-6 col-md-10 " style="padding-left:40px;">
+				<input type="submit" value="Edit" class="btn btn-primary " style="width:129px;" />
+			</div>
+		</div>
+	</div>
+}

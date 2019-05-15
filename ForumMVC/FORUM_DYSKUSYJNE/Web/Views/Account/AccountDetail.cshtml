@@ -1,0 +1,164 @@
+﻿	@model FORUM_DYSKUSYJNE.Core.Models.User
+@using FORUM_DYSKUSYJNE.CustomMembershipMVC;
+
+@{
+	ViewBag.Title = "AccountDetail";
+}
+<div class=" col-lg-offset-4 img2">
+	<img src="~/Content/images/hotslogo.png" />
+</div>
+<div>
+
+	<div class="dl-horizontal">
+
+
+		@if (Model.UserId == (User as CustomPrincipal).UserId)
+		{
+
+			<span style="padding-right:5px;">
+				<a href="@Url.Action("RecievedMessages", "PrivateMessage", new { @id = Model.UserId })" class="btn btn-primary">
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+
+					Inbox
+				</a>
+
+
+			</span>
+			<span style="padding-right:5px;">
+
+				<a href="@Url.Action("SentMessages", "PrivateMessage", new { @id = Model.UserId })" class="btn btn-primary">
+					<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+
+					My Messages
+				</a>
+			</span>
+			<a href="@Url.Action("SendMessage", "PrivateMessage")" class="btn btn-primary">
+				<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+
+				Send Message
+			</a>
+
+		}
+		else
+		{
+			<a href="@Url.Action("SendMessage", "PrivateMessage", new { @id = Model.UserId })" class="btn btn-primary">
+				<span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+				Send Message
+			</a>
+		}
+	</div>
+	<hr />
+
+	<dl class="dl-horizontal" style="margin-left:350px;">
+		<dt>
+			@Html.LabelFor(x => x.Username, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+
+
+		<dd>
+			@Html.DisplayFor(model => model.Username)
+		</dd>
+
+		<dt>
+			@Html.LabelFor(model => model.Email, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Email)
+		</dd>
+
+		<dt>
+			@Html.LabelFor(model => model.Name, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Name)
+		</dd>
+
+		<dt>
+			@Html.LabelFor(model => model.Location, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Location)
+		</dd>
+
+
+		<dt>
+			@Html.LabelFor(model => model.BirthdayDate, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.BirthdayDate)
+		</dd>
+		<dt>
+			@Html.LabelFor(model => model.Role, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+		<dd>
+			@Model.Role.OrderBy(r => r.RoleName).Select(n => n.RoleName).First()
+		</dd>
+		<dt>
+			@Html.LabelFor(model => model.Rank, htmlAttributes: new { style = "font-size:20px;margin-top:-5px;" })
+		</dt>
+		<dd>
+			@Html.DisplayFor(model => model.Rank.RankName)
+		</dd>
+
+		<dt>
+
+		</dt>
+
+
+	</dl>
+	@if (Model.Avatar != null)
+	{
+		<div class="col-lg-offset-5">
+			<img src="@Url.Action("UserAvatar", "Account" ,new {@id = Model.UserId})"
+				 style="width:160px;height:160px; background: #FFFFFF;
+
+ padding: 6px;" />
+		</div>
+
+	}
+	else
+	{
+		<div class="col-lg-offset-5">
+			<img src="~/Content/Images/empty-avatar.png"
+				 style="width:160px;height:160px; background: #FFFFFF;
+
+ padding: 6px;" />
+		</div>
+	}
+
+	@Html.ValidationMessage("AvatarSizeError", new { @class = "text-danger", style = "margin-left:500px;" })
+	@Html.ValidationMessage("AvatarResolutionError", new { @class = "text-danger" })
+
+	@if (Model.UserId == (User as CustomPrincipal).UserId)
+	{
+		using (Html.BeginForm("AccountDetail", "Account", FormMethod.Post, new { @class = "form-horizontal", enctype = "multipart/form-data" }))
+		{
+			<div class="form-group">
+				<div class="col-lg-1">
+					@Html.LabelFor(model => model.Avatar, new { @class = "col-md-2 control-label", style = "margin-left:452px;" })
+				</div>
+				<div class="col-md-10">
+
+					<input type="file" name="UserAvatar" id="fileUpload" accept=".png,.jpg,.jpeg,.gif,.tif" style="margin-left:435px;" />
+
+				</div>
+			</div>
+
+			@Html.HiddenFor(Model => Model.BirthdayDate)
+			@Html.HiddenFor(Model => Model.Name)
+			@Html.HiddenFor(Model => Model.Username)
+			@Html.HiddenFor(Model => Model.Email)
+			@Html.HiddenFor(Model => Model.Location)
+			@Html.HiddenFor(Model => Model.UserId)
+
+			<div class="form-group">
+				<div class="col-md-offset-6 col-md-10">
+					<input type="submit" value="Add avatar" class="btn btn-primary " style="margin-left:-53px;" />
+				</div>
+			</div>
+		}
+	}
+</div>
