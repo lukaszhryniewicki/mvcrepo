@@ -10,12 +10,12 @@
 
 
 <div class="imgbox	">
-	<img src="~/Content/images/topimg.png" class="center-fit" />
+	<img src="~/Web/Content/images/topimg.png" class="center-fit" />
 </div>
 <div class="row">
 
 	<div class="col-lg-1" style="margin-top:-12px;margin-left:-5px;">
-		<img src="~/Content/Images/hotsminilogo.png" class="mini-logo" />
+		<img src="~/Web/Content/Images/hotsminilogo.png" class="mini-logo" />
 	</div>
 
 	<div class="col-lg-6" style="font:bold;font-size:40px;margin-left:-40px; ">@Model.SectionName</div>
@@ -183,7 +183,7 @@
 
 						<div class="row">
 							<div class="col-lg-3">
-								<img src="~/Content/Images/hot.png" width="25" height="25" />
+								<img src="~/Web/Content/Images/hot.png" width="25" height="25" />
 								@topic.Name
 							</div>
 							<div class="col-lg-1" style="padding-left:42px;">
@@ -215,7 +215,7 @@
 
 
 
-							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()", }, htmlAttributes: new { @class = "section-btn1 btn btn-danger" });
+							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()", }, htmlAttributes: new { @class = "section-btn1 btn btn-danger" })
 
 
 
@@ -226,7 +226,7 @@
 						}
 						else
 						{
-							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger", style = "visibility:hidden" });
+							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger", style = "visibility:hidden" })
 							@Html.ActionLink(" Unstick", "ToggleStick", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, htmlAttributes: new { @class = "section-btn2 btn btn-primary", style = "visibility:hidden" })
 						}
 
@@ -246,7 +246,7 @@
 
 							<div class="row">
 								<div class="col-lg-3">
-									<img src="~/Content/Images/hot.png" width="25" height="25" />
+									<img src="~/Web/Content/Images/hot.png" width="25" height="25" />
 									@topic.Name
 								</div>
 								<div class="col-lg-1" style="padding-left:42px;">
@@ -273,7 +273,7 @@
 
 
 
-							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger", style = "visibility:hidden" });
+							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger", style = "visibility:hidden" })
 							@Html.ActionLink(" Unstick", "ToggleStick", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, htmlAttributes: new { @class = "section-btn2 btn btn-primary", style = "visibility:hidden" })
 
 
@@ -293,7 +293,7 @@
 
 					<div class="row">
 						<div class="col-lg-3">
-							<img src="~/Content/Images/hot.png" width="25" height="25" />
+							<img src="~/Web/Content/Images/hot.png" width="25" height="25" />
 							@topic.Name
 						</div>
 						<div class="col-lg-1" style="padding-left:42px;">
@@ -325,7 +325,7 @@
 						if ((User as CustomPrincipal).IsInRole("Admin") || Model.isMod)
 						{
 
-							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn3 btn btn-danger", style = "visibility:hidden" });
+							@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn3 btn btn-danger", style = "visibility:hidden" })
 						}
 
 						if ((User as CustomPrincipal).IsInRole("Admin"))
@@ -335,7 +335,7 @@
 					}
 					else
 					{
-						@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn3 btn btn-danger", style = "visibility:hidden" });
+						@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn3 btn btn-danger", style = "visibility:hidden" })
 						@Html.ActionLink(" Unstick", "ToggleStick", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, htmlAttributes: new { @class = "section-btn4 btn btn-primary", style = "visibility:hidden" })
 					}
 
@@ -366,7 +366,7 @@
 
 					<div class="row">
 						<div class="col-lg-3">
-							<img src="~/Content/Images/eyes.png" width="25" height="25" />
+							<img src="~/Web/Content/Images/eyes.png" width="25" height="25" />
 							@topic.Name
 						</div>
 						<div class="col-lg-1" style="padding-left:42px;">
@@ -396,7 +396,7 @@
 
 
 
-					@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger" });
+					@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger" })
 
 
 
@@ -423,7 +423,7 @@
 
 						<div class="row">
 							<div class="col-lg-3">
-								<img src="~/Content/Images/eyes.png" width="25" height="25" />
+								<img src="~/Web/Content/Images/eyes.png" width="25" height="25" />
 								@topic.Name
 							</div>
 							<div class="col-lg-1" style="padding-left:42px;">
@@ -449,7 +449,7 @@
 
 
 
-						@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger", style = "visibility:hidden" });
+						@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn1 btn btn-danger", style = "visibility:hidden" })
 						@Html.ActionLink("Stick", "ToggleStick", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, htmlAttributes: new { @class = "section-btn2 btn btn-primary", style = "visibility:hidden" })
 
 
@@ -468,7 +468,7 @@
 
 				<div class="row">
 					<div class="col-lg-3">
-						<img src="~/Content/Images/eyes.png" width="25" height="25" />
+						<img src="~/Web/Content/Images/eyes.png" width="25" height="25" />
 						@topic.Name
 					</div>
 					<div class="col-lg-1" style="padding-left:42px;">
@@ -494,7 +494,7 @@
 
 
 
-				@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn3 btn btn-danger", style = "visibility:hidden" });
+				@Ajax.ActionLink("Delete", "Delete", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, new AjaxOptions { HttpMethod = "DELETE", OnSuccess = "window.location.reload()" }, htmlAttributes: new { @class = "section-btn3 btn btn-danger", style = "visibility:hidden" })
 				@Html.ActionLink(" Stick", "ToggleStick", "Topic", new { @id = topic.TopicId, @sectionId = topic.SectionId }, htmlAttributes: new { @class = "section-btn4 btn btn-primary", style = "visibility:hidden" })
 
 
