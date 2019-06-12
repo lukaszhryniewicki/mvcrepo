@@ -14,6 +14,8 @@ namespace FORUM_DYSKUSYJNE.Core.Models
 	{
 		public int Id { get; set; }
 
+		[Required]
+		[MaxLength(100)]
 		public string Content { get; set; }
 
 		public DateTime CreateDate { get; set; }

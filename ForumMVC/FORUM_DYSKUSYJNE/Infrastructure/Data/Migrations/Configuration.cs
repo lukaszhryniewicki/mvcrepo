@@ -2,6 +2,7 @@ namespace FORUM_DYSKUSYJNE.Infrastructure.Data
 {
 	using FORUM_DYSKUSYJNE.Core.Models;
 	using System;
+	using System.Collections.Generic;
 	using System.Data.Entity.Migrations;
 	using System.Linq;
 
@@ -15,71 +16,60 @@ namespace FORUM_DYSKUSYJNE.Infrastructure.Data
 
 		protected override void Seed(ForumDatabase context)
 		{
+
 			
-		
-			var admin = context.Users.Where(u => u.Username == "Admin").FirstOrDefault();
 
-			var roles = context.Roles.FirstOrDefault();
-			var emoticons = context.Emoticons.FirstOrDefault();
 
-			var ranks = context.Ranks.FirstOrDefault();
-			if (roles == null)
-			{
 				var role1 = new Role()
 				{
 					RoleName = "Admin"
 				};
-			/*	var role2 = new Role()
+				var role2 = new Role()
 				{
 					RoleName = "Moderator"
 				};
-			*/
 				var role3 = new Role()
 				{
 					RoleName = "User"
 				};
-				context.Roles.Add(role1);
-				//context.Roles.Add(role2);
-				context.Roles.Add(role3);
-				
-			}
+				context.Roles.AddOrUpdate(x=>x.RoleName,role1);
+				context.Roles.AddOrUpdate(x=>x.RoleName,role2);
+				context.Roles.AddOrUpdate(x => x.RoleName, role2);
 
-			if (ranks==null)
-			{
-				var rank1 = new Rank()
-				{
-					RankName = "New member",
-					Requirement =0,
-				};
-				var rank2 = new Rank()
-				{
-					RankName = "Junior member",
-					Requirement =5,
-				};
-				var rank3 = new Rank()
-				{
-					RankName = "Member",
-					Requirement =20,
-				};
+
+
 				var rank4 = new Rank()
 				{
 					RankName = "Active member",
-					Requirement =100,
+					Requirement = 100,
 				};
 
-				context.Ranks.Add(rank1);
-				context.Ranks.Add(rank2);
-				context.Ranks.Add(rank3);
-				context.Ranks.Add(rank4);
-				context.SaveChanges();
+				context.Ranks.AddOrUpdate(x=>x.RankName,
+					new Rank()
+					{
+						RankName = "New member",
+						Requirement = 0,
+					}, new Rank()
+					{
+						RankName = "Junior member",
+						Requirement = 5,
+					}, new Rank()
+					{
+						RankName = "Member",
+						Requirement = 20,
+					}, new Rank()
+					{
+						RankName = "Active memberr",
+						Requirement = 100,
+					},
+					rank4
+					);
 
-			}
 
-			if (admin == null)
-			{
-				var rank = context.Ranks.Where(x => x.RankName == "Active member").First();
-				var user = new User()
+				context.Users.AddOrUpdate(x=>x.Username, 
+					new User()
 				{
+					UserId = 1,
 					Username = "Admin",
 					Name = "Maciej",
 					Email = "alienown@o2.pl",
@@ -89,190 +79,189 @@ namespace FORUM_DYSKUSYJNE.Infrastructure.Data
 					IsActive = true,
 					Avatar = null,
 					ActivationCode = new Guid(),
-					Rank = rank
+					Rank = rank4,
+					Role = new List<Role>() { role1, role2, role3 }
 
-				};
-				var role = context.Roles.ToList();
-				user.Role = role;
-				context.Users.Add(user);
-				
+				}
+					);
 
-			}
-			var groups = context.Groups.FirstOrDefault();
-			if(groups== null)
-			{
 
 				var group1 = new Group()
 				{
+					GroupId=1,
 					GroupName = "SUPPORT"
 				};
 				var group2 = new Group()
 				{
+					GroupId=2,
 					GroupName = "COMMUNITY"
 				};
 				var group3 = new Group()
 				{
+					GroupId=3,
 					GroupName = "OFF TOPIC"
 				};
-				context.Groups.Add(group1);
-				context.Groups.Add(group2);
-				context.Groups.Add(group3);
+				context.Groups.AddOrUpdate(x=>x.GroupName,
+					new Group()
+					{
+						GroupName = "SUPPORT"
+					},
+					new Group()
+					{
+						GroupName = "COMMUNITY"
+					},
+					new Group()
+					{
+						GroupName = "OFF TOPIC"
+					}
+					);
 
-			}
 
-			var sections = context.Sections.FirstOrDefault();
-			if(sections== null)
-			{
 				var section1 = new Section()
 				{
+					SectionId=1,
 					Name = "MEMES",
 					Description = "Here you can post your highly creative memes",
-					GroupId = 6,
+					GroupId = 3,
 					Order = 1,
-					IconName="memes.png"
+					IconName = "memes.png"
 				};
 				var section2 = new Section()
 				{
-
+					SectionId = 2,
 					Name = "HOBBY",
 					Description = "Talk about your interesting hobbies",
-					GroupId = 6,
+					GroupId = 3,
 					Order = 2,
-					IconName="hobby.png"
+					IconName = "hobby.png"
 				};
 				var section3 = new Section()
 				{
+					SectionId = 3,
 					Name = "GENERAL DISCUSSION",
 					Description = "Discuss Heroes of the Storm",
-					GroupId = 5,
+					GroupId = 2,
 					Order = 1,
-					IconName="general.png"
+					IconName = "general.png"
 				};
 				var section4 = new Section()
 				{
+					SectionId = 4,
 					Name = "COMPETITIVE DISCUSSTION",
 					Description = "Discuss Heroes of the Storm esports, tournaments, teams, and competitive play ",
-					GroupId = 5,
+					GroupId = 2,
 					Order = 2,
-					IconName="competitive.png"
+					IconName = "competitive.png"
 				};
 				var section5 = new Section()
 				{
+					SectionId = 5,
 					Name = "LOOKING FOR GROUP",
 					Description = "Looking to play with a party or wanting to promote the one you’re in? This is the place.",
-					GroupId = 5,
+					GroupId = 2,
 					Order = 3,
-					IconName="looking.png"
+					IconName = "looking.png"
 				};
 				var section6 = new Section()
 				{
+					SectionId = 6,
 					Name = "FEEDBACK",
 					Description = "Share and discuss all feedback from Heroes of the Storm ",
-					GroupId = 5,
+					GroupId = 2,
 					Order = 4,
-					IconName="feedback.png"
+					IconName = "feedback.png"
 				};
 				var section7 = new Section()
 				{
+					SectionId = 7,
 					Name = "COMMUNITY CREATIONS",
 					Description = "Share and discuss artwork, cosplay, guides and other creations made by the Heroes of the Storm community.",
-					GroupId = 5,
+					GroupId = 2,
 					Order = 5,
-					IconName="community.png"
+					IconName = "community.png"
 				};
 
 				var section8 = new Section()
 				{
+					SectionId = 8,
 					Name = "TECHNICAL SUPPORT",
 					Description = "For problems installing, patching or playing the Heroes of the Storm, please contact us here. ",
-					GroupId = 4,
+					GroupId = 1,
 					Order = 1,
-					IconName="support.png"
+					IconName = "support.png"
 				};
 				var section9 = new Section()
 				{
+					SectionId = 9,
 					Name = "GAMING AND HARDWARE",
 					Description = "Want to talk about a non-Blizzard games, ask for PC hardware advice or event discuss the latest innovations in science? Come on in.",
-					GroupId = 6,
+					GroupId = 3,
 					Order = 3,
-					IconName="gaming.png"
+					IconName = "gaming.png"
 				};
 				var section10 = new Section()
 				{
+					SectionId = 10,
 					Name = "MEDIA AND LITERATURE",
 					Description = "They inspire entertain and delight – come here to chat about movies, TV, music and literature.",
-					GroupId = 6,
+					GroupId = 3,
 					Order = 4,
-					IconName="media.png"
+					IconName = "media.png"
 				};
 
-				context.Sections.Add(section1);
-				context.Sections.Add(section2);
-				context.Sections.Add(section3);
-				context.Sections.Add(section4);
-				context.Sections.Add(section5);
-				context.Sections.Add(section6);
-				context.Sections.Add(section7);
-				context.Sections.Add(section8);
-				context.Sections.Add(section9);
-				context.Sections.Add(section10);
+				context.Sections.AddOrUpdate(x=>x.Name, section1);
+				context.Sections.AddOrUpdate(x => x.Name, section2);
+				context.Sections.AddOrUpdate(x => x.Name, section3);
+				context.Sections.AddOrUpdate(x => x.Name, section4);
+				context.Sections.AddOrUpdate(x => x.Name, section5);
+				context.Sections.AddOrUpdate(x => x.Name, section6);
+				context.Sections.AddOrUpdate(x => x.Name, section7);
+				context.Sections.AddOrUpdate(x => x.Name, section8);
+				context.Sections.AddOrUpdate(x => x.Name, section9);
+				context.Sections.AddOrUpdate(x => x.Name, section10);
 
-			}
-			if (context.Topics.Count() == 0)
-			{
-				var topic = new Topic()
-				{
-					AuthorId = 1,
-					Name = "test",
-					LastModified = DateTime.Now,
-					CreateDate = DateTime.Now,
-					PostsCount = 0,
-					SectionId = 2,
-					Sticked = false,
-					ViewsCount = 0,
-				};
-				context.Topics.Add(topic);
-				context.SaveChanges();
-			}
-			if (emoticons==null)
-			{
+
+
+
+
 				var emote1 = new Emoticon()
 				{
-					Name="Kreygasm",
-					SourceLink= "https://static-cdn.jtvnw.net/emoticons/v1/41/1.0",
+					EmoticonId=1,
+					Name = "Kreygasm",
+					SourceLink = "https://static-cdn.jtvnw.net/emoticons/v1/41/1.0",
 				};
 
 				var emote2 = new Emoticon()
 				{
-
-					Name ="cmonBruh",
+					EmoticonId = 2,
+					Name = "cmonBruh",
 					SourceLink = "https://static-cdn.jtvnw.net/emoticons/v1/84608/1.0",
 				};
 
 				var emote3 = new Emoticon()
 				{
-
-					Name ="Murky",
+					EmoticonId = 3,
+					Name = "Murky",
 					SourceLink = "https://d1u5p3l4wpay3k.cloudfront.net/hots_es_gamepedia/b/bc/Murky_Happy_Emoji.png?version=305199b68c28fc73fc209659c1551f93",
 				};
 
 				var emote4 = new Emoticon()
 				{
-
-					Name ="Jebaited",
+					EmoticonId = 4,
+					Name = "Jebaited",
 					SourceLink = "https://static-cdn.jtvnw.net/emoticons/v1/114836/1.0",
 				};
 				var emote5 = new Emoticon()
 				{
+					EmoticonId = 5,
 					Name = "PJSalt",
 					SourceLink = "https://static-cdn.jtvnw.net/emoticons/v1/36/1.0"
 				};
-				context.Emoticons.Add(emote1);
-				context.Emoticons.Add(emote2);
-				context.Emoticons.Add(emote3);
-				context.Emoticons.Add(emote4);
-				context.Emoticons.Add(emote5);
-			}
+				context.Emoticons.AddOrUpdate(x=>x.Name, emote1);
+				context.Emoticons.AddOrUpdate(x => x.Name, emote2);
+				context.Emoticons.AddOrUpdate(x => x.Name, emote3);
+				context.Emoticons.AddOrUpdate(x => x.Name, emote4);
+				context.Emoticons.AddOrUpdate(x => x.Name, emote5);
 
 			context.SaveChanges();
 

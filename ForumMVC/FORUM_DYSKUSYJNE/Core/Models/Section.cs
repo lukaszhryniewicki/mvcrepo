@@ -17,6 +17,7 @@ namespace FORUM_DYSKUSYJNE.Core.Models
 		public string Description { get; set; }
 		public string IconName { get; set; }
 		public int GroupId { get; set; }
+		[Required]
 		public int Order { get; set; }
 		public Group Group { get; set; }
 		public virtual ICollection<Topic> Topic { get; set; }

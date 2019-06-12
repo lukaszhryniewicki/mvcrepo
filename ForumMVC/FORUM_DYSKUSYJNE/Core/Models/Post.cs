@@ -12,8 +12,11 @@ namespace FORUM_DYSKUSYJNE.Core.Models
 	{
 		public int PostId { get; set; }
 		[Required]
+		[MaxLength(255)]
 		public string Content { get; set; }
+		[Required]
 		public DateTime CreateDate { get; set; }
+		[Required]
 		public DateTime LastModified { get; set; }
 		public int TopicId { get; set; }
 		public virtual Topic Topic { get; set; }

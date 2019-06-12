@@ -22,6 +22,7 @@ namespace FORUM_DYSKUSYJNE.Core.Models
 		[ForeignKey("ReceiverId")]
 		public virtual User Receiver { get; set; }
 		public DateTime SendDate { get; set; }
+		[Required]
 		public int BelongsTo { get; set; }
 	}
 }

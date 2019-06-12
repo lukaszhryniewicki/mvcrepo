@@ -205,6 +205,10 @@
     <Compile Include="Core\Contracts\IUsersService.cs" />
     <Compile Include="Core\Contracts\IPrivateMessagesService.cs" />
     <Compile Include="Core\ModelValidators\AnnouncementValidator.cs" />
+    <Compile Include="Infrastructure\Data\Migrations\201906122028225_Init.cs" />
+    <Compile Include="Infrastructure\Data\Migrations\201906122028225_Init.Designer.cs">
+      <DependentUpon>201906122028225_Init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\Services\AnnouncementsService.cs" />
     <Compile Include="Infrastructure\Services\GroupService.cs" />
     <Compile Include="Infrastructure\Services\PrivateMessagesService.cs" />
@@ -243,10 +247,6 @@
     <Compile Include="Infrastructure\Data\ForumDatabase.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
-    </Compile>
-    <Compile Include="Infrastructure\Data\Migrations\201904142151260_init.cs" />
-    <Compile Include="Infrastructure\Data\Migrations\201904142151260_init.Designer.cs">
-      <DependentUpon>201904142151260_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\Data\Migrations\Configuration.cs" />
     <Compile Include="Web\ViewModels\ChangePasswordViewModel.cs" />
@@ -436,8 +436,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Infrastructure\Data\Migrations\201904142151260_init.resx">
-      <DependentUpon>201904142151260_init.cs</DependentUpon>
+    <EmbeddedResource Include="Infrastructure\Data\Migrations\201906122028225_Init.resx">
+      <DependentUpon>201906122028225_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
